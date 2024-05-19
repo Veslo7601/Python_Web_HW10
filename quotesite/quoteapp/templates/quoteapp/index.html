@@ -14,14 +14,20 @@
         </ul>
     </nav>
 
-    {% for q in quote %}
     <ul>
+        {% for q in quote %}
         <li>
-            <a href="{% url 'quoteapp:detail' q.id %}" role="button" class="outline"> {{ quote.description }} </a>
+            <p><strong>Author:</strong> {{ q.author }}</p>
+            <p><strong>Quote:</strong> {{ q.description }}</p>
+            <p><strong>Tags:</strong>
+                {% for tag in q.tags.all %}
+                    {{ tag.tag }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <a href="{% url 'quoteapp:detail' q.id %}" role="button" class="outline">Details</a>
         </li>
+        {% endfor %}
     </ul>
-    {% endfor %}
 </main>
 </body>
 </html>
-
