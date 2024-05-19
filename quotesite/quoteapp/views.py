@@ -26,7 +26,7 @@ def quote(request):
         if form.is_valid():
             new_quote = form.save()
 
-            choice_tags = Tag.objects.filter(name__in=request.POST.getlist('tags'))
+            choice_tags = Tag.objects.filter(tag__in=request.POST.getlist('tags'))
             for tag in choice_tags.iterator():
                 new_quote.tags.add(tag)
 
