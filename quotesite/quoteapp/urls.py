@@ -8,5 +8,5 @@ urlpatterns = [
     path('quote/', views.quote, name='quote'),
     path('tag/', views.tag, name='tag'),
     path('detail/<int:quote_id>', views.detail, name='detail'),
-    path('delete/<int:note_id>', views.delete_quote, name='delete'),
+    path('delete/<int:quote_id>', views.delete_quote, name='delete'),
 ]

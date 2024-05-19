@@ -13,4 +13,3 @@ class Quote(models.Model):
     author = models.CharField(max_length=64, null=False)
     tags = models.ManyToManyField(Tag)
 
-

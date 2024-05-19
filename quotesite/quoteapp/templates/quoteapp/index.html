@@ -7,13 +7,25 @@
 </head>
 <body>
 <main class="container">
-    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
-        <ul>
-            <li><a href="{% url 'quoteapp:tag' %}" role="button">Add quote</a></li>
-            <li><a href="{% url 'quoteapp:quote' %}" role="button">Add Tag</a></li>
-        </ul>
-    </nav>
 
+    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+        {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url 'quoteapp:tag' %}" role="button">Add Tag</a></li>
+            <li><a href="{% url 'quoteapp:quote' %}" role="button">Add Quote</a></li>
+        </ul>
+        <ul>
+            <li>Welcome <b>{{ user.username }}!</b></li>
+            <li><a href="{% url 'users:logout' %}" role="button">Logout</a></li>
+        </ul>
+        {% else %}
+        <ul>
+            <li><a href="{% url 'users:signup' %}" role="button">Sign Up</a></li>
+            <li><a href="{% url 'users:login' %}" role="button">Login</a></li>
+        </ul>
+        {% endif %}
+    </nav>
+    
     <ul>
         {% for q in quote %}
         <li>
@@ -24,7 +36,10 @@
                     {{ tag.tag }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </p>
-            <a href="{% url 'quoteapp:detail' q.id %}" role="button" class="outline">Details</a>
+            <a href="{% url 'quoteapp:detail' q.id %}" role="button" class="outline"> {{ q.author }} </a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'quoteapp:delete' q.id %}" role="button" class="contrast"> Delete quote </a>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>
