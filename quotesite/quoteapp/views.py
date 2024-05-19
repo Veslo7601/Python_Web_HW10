@@ -3,8 +3,14 @@ from .models import Tag, Quote
 from .forms import TagForm, QuoteForm
 # Create your views here.
 
+
 def main(request):
-    return render(request, 'quoteapp/index.html')
+    quote_o = Quote.objects.all()
+    return render(request, 'quoteapp/index.html', {"quote": quote_o})
+
+def delete_quote(request, quote_id):
+    Quote.objects.get(pk=quote_id).delete()
+    return redirect(to='quoteapp:main')
 
 def tag(request):
     if request.method == 'POST':

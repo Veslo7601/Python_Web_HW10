@@ -7,7 +7,21 @@
 </head>
 <body>
 <main class="container">
-    <h1>Main page</h1>
+    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+        <ul>
+            <li><a href="{% url 'quoteapp:tag' %}" role="button">Add quote</a></li>
+            <li><a href="{% url 'quoteapp:quote' %}" role="button">Add Tag</a></li>
+        </ul>
+    </nav>
+
+    {% for q in quote %}
+    <ul>
+        <li>
+            <a href="{% url 'quoteapp:detail' q.id %}" role="button" class="outline"> {{ quote.description }} </a>
+        </li>
+    </ul>
+    {% endfor %}
 </main>
 </body>
 </html>
+
