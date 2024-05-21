@@ -20,5 +20,4 @@ class Tag(models.Model):
 class Quotes(models.Model):
     tags =  models.ManyToManyField(Tag)
     author = models.ForeignKey(Autors, on_delete=models.CASCADE)
-    quote = description = models.CharField(max_length=126, null=False)
-
+    quote = models.CharField(max_length=126, null=False)
