@@ -10,7 +10,6 @@ from django.core.paginator import Paginator
 def main(request):
     quotes_list = Quotes.objects.all()
     paginator = Paginator(quotes_list, 10)
-
     page_number = request.GET.get('page')
     quotes = paginator.get_page(page_number)
     return render(request, 'quoteapp/index.html', {'quotes': quotes})
